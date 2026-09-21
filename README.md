@@ -44,11 +44,13 @@ O que chega na planilha:
 
 Site estático. Na Vercel, importar o repositório e publicar sem build.
 
-Domínio previsto, já reconhecido pelo backend caso o `?aba=` se perca num link
-compartilhado: `indique.colegio.cppem.com.br`.
+Domínio no ar: **`indica.colegio.cppem.com.br`**, projeto Vercel
+`indicacao-colegio`, conectado ao repositório (um `git push` publica sozinho).
 
-Publicar em outro domínio funciona — o `?aba=` decide sozinho. Mas se mudar,
-vale acertar a lista `DOMINIOS` no Apps Script.
+O endereço `indicacao-colegio.vercel.app` continua valendo.
+
+Os dois estão na lista `DOMINIOS` do Apps Script, que é a rede que segura um
+link compartilhado sem o `?aba=`.
 
 ---
 
