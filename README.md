@@ -65,24 +65,26 @@ const BU = {
   nome: "COLEGIO",              // vai junto nos eventos de dataLayer
   whatsapp: "5581997076388",
   whatsappMsg: "...",
-  pedirChavePix: false,         // ver abaixo
   selo: { ate: 100, prefixo: "R$ ", sufixo: "" }
 };
 ```
 
-### Por que a chave PIX está desligada aqui
+### A chave PIX não existe nesta página
 
-No CPPEM a recompensa é paga em dinheiro, então a chave PIX é obrigatória. No
-Colégio os benefícios são **desconto na mensalidade e fardamento**, aplicados
-pela própria escola — não existe pagamento por PIX. Pedir a chave seria atrito
-num formulário de um minuto, em troca de um dado que ninguém usaria.
+Os benefícios do Colégio são **desconto na mensalidade e fardamento**,
+aplicados pela própria escola. Não existe pagamento em dinheiro, então a chave
+nunca teve uso aqui.
 
-O campo continua no `index.html`, escondido e fora da validação. Trocar
-`pedirChavePix` para `true` devolve tudo, sem mais nenhuma alteração.
+Ela foi **removida de vez**, não escondida: saiu do HTML, do CSS e do JS, junto
+com a validação que só existia para ela. Campo escondido continua no
+código-fonte e volta a aparecer se o `script.js` falhar ao carregar.
 
-**Se o programa passar a pagar algo em dinheiro, vire essa linha.** A coluna
-`Chave pix indicador` fica vazia nas linhas de BU `COLEGIO` até lá — é esperado,
-não é falha.
+A **UniCive é a única das três que pede a chave**, porque lá o prêmio cai no
+Pix do indicador. Para trazer o campo de volta, copie da `indicaçõesUNICIVE` o
+bloco `#campo-pix` do `index.html` e a seção `Chave Pix` do `script.js`.
+
+A coluna `Chave pix indicador` fica vazia nas linhas de BU `COLEGIO`, e isso é
+o esperado.
 
 ### O selo animado
 
@@ -122,7 +124,7 @@ para" em vez de "da 3ª". Nos chips, que são DM Sans, o `3ª` sai certo e ficou
 
 ## 5. O formulário
 
-Quatro campos, todos obrigatórios (cinco se `pedirChavePix` for ligado):
+Quatro campos, todos obrigatórios:
 
 | campo | validação |
 |---|---|

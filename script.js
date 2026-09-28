@@ -29,15 +29,6 @@ const BU = {
   whatsapp: "5581997076388",
   whatsappMsg: "Oi! Acabei de indicar uma família pelo programa de indicação do Colégio CPPEM.",
 
-  /* No Colégio os benefícios são desconto na mensalidade e fardamento,
-     aplicados pela própria escola — não há pagamento por PIX, então pedir a
-     chave seria atrito sem uso. A coluna "Chave pix indicador" da planilha
-     simplesmente fica vazia nas linhas com BU = COLEGIO.
-
-     Virar isto para `true` devolve o campo, já validado, sem mais nada a
-     mudar — o HTML dele continua no index.html. */
-  pedirChavePix: false,
-
   /* O selo animado da faixa "para quem você indicar". No CPPEM é 10%; aqui é
      R$ 100 de desconto na matrícula. O anel fecha a volta inteira enquanto o
      número sobe até `ate` — o gesto é de "carregando", não de proporção. */
@@ -95,13 +86,10 @@ const sucesso     = document.getElementById("sucesso");
 const placarEl    = document.getElementById("sucesso-placar");
 const botaoEnviar = document.getElementById("ind_enviar");
 const botaoOutra  = document.getElementById("ind_outra");
-const pixTipoEl   = document.getElementById("pix-tipo");
-const campoPixEl  = document.getElementById("campo-pix");
 
 const campos = {
   nome:              document.getElementById("ind_nome"),
   telefone:          document.getElementById("ind_telefone"),
-  pix:               document.getElementById("ind_pix"),
   nomeIndicado:      document.getElementById("ind_nome_indicado"),
   telefoneIndicado:  document.getElementById("ind_telefone_indicado")
 };
@@ -109,14 +97,6 @@ const campos = {
 /* Campos que voltam a ficar em branco quando a pessoa indica outra família.
    Os dados de quem indica ficam — a graça de indicar várias é não redigitar. */
 const CAMPOS_DO_INDICADO = [campos.nomeIndicado, campos.telefoneIndicado];
-
-/* A chave PIX some do formulário nesta BU. Esconder não basta: um input
-   escondido continua sendo enviado e validado, então ele também é esvaziado
-   e sai da lista de regras (ver `validar`). */
-if (!BU.pedirChavePix && campoPixEl) {
-  campoPixEl.hidden = true;
-  campos.pix.value = "";
-}
 
 /* ---------- WhatsApp ---------- */
 
@@ -178,92 +158,7 @@ function telefoneValido(valor) {
 });
 
 /* =========================================================
-   Chave PIX
-
-   Fica aqui mesmo desligada: é o que permite religar o campo trocando uma
-   linha no bloco BU, sem reescrever validação nenhuma.
-   ========================================================= */
-
-function digitosIguais(d) {
-  return /^(\d)\1+$/.test(d);
-}
-
-/* Dígitos verificadores do CPF. */
-function cpfValido(d) {
-  if (d.length !== 11 || digitosIguais(d)) return false;
-
-  for (let rodada = 0; rodada < 2; rodada++) {
-    const ate = 9 + rodada;
-    let soma = 0;
-
-    for (let i = 0; i < ate; i++) soma += Number(d[i]) * (ate + 1 - i);
-
-    const resto = (soma * 10) % 11;
-    const dv = resto === 10 ? 0 : resto;
-
-    if (dv !== Number(d[ate])) return false;
-  }
-
-  return true;
-}
-
-/* Dígitos verificadores do CNPJ. */
-function cnpjValido(d) {
-  if (d.length !== 14 || digitosIguais(d)) return false;
-
-  for (let rodada = 0; rodada < 2; rodada++) {
-    const ate = 12 + rodada;
-    let peso = ate - 7;
-    let soma = 0;
-
-    for (let i = 0; i < ate; i++) {
-      soma += Number(d[i]) * peso;
-      peso = peso === 2 ? 9 : peso - 1;
-    }
-
-    const resto = soma % 11;
-    const dv = resto < 2 ? 0 : 11 - resto;
-
-    if (dv !== Number(d[ate])) return false;
-  }
-
-  return true;
-}
-
-const ehEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-const ehAleatoria = (v) => /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i.test(v.trim());
-
-/* Devolve o tipo reconhecido, ou "" se não for chave nenhuma.
-
-   Os 11 dígitos são ambíguos de propósito: um CPF e um celular com DDD têm o
-   mesmo tamanho. Em vez de escolher um e recusar o outro, aceitamos os dois —
-   basta passar em UM dos testes. */
-function tipoDaChavePix(valor) {
-  const v = String(valor).trim();
-  if (!v) return "";
-
-  if (ehEmail(v)) return "e-mail";
-  if (ehAleatoria(v)) return "chave aleatória";
-
-  const d = v.replace(/\D/g, "");
-
-  if (cnpjValido(d)) return "CNPJ";
-  if (cpfValido(d)) return "CPF";
-
-  const nacional = d.replace(/^55(?=\d{11}$)/, "");
-  if (nacional.length === 11 && nacional[2] === "9" && Number(nacional.slice(0, 2)) >= 11) return "telefone";
-
-  return "";
-}
-
-campos.pix.addEventListener("input", () => {
-  const tipo = tipoDaChavePix(campos.pix.value);
-
-  pixTipoEl.textContent = tipo ? "Reconhecemos como " + tipo + "." : "";
-  limparErro(campos.pix);
-});
-
-/* =========================================================
+   Validação/* =========================================================
    Validação
    ========================================================= */
 
@@ -284,16 +179,6 @@ function validar() {
     [campos.nomeIndicado,     nomeValido,     "Informe o nome e o sobrenome do responsável que você está indicando."],
     [campos.telefoneIndicado, telefoneValido, "Informe o WhatsApp do responsável com DDD. Exemplo: (81) 90000-0000."]
   ];
-
-  /* Só entra na lista quando o campo está em uso — um input escondido nunca
-     pode barrar um envio, porque a pessoa não tem como corrigi-lo. */
-  if (BU.pedirChavePix) {
-    regras.splice(2, 0, [
-      campos.pix,
-      (v) => !!tipoDaChavePix(v),
-      "Chave PIX inválida. Use CPF, telefone, e-mail ou chave aleatória."
-    ]);
-  }
 
   regras.forEach(([input, teste, msg]) => {
     limparErro(input);
@@ -383,7 +268,6 @@ async function enviar() {
   const payload = {
     nome: campos.nome.value.trim(),
     telefone: campos.telefone.value.trim(),
-    chave_pix: BU.pedirChavePix ? campos.pix.value.trim() : "",
     nome_indicado: campos.nomeIndicado.value.trim(),
     telefone_indicado: campos.telefoneIndicado.value.trim(),
     origem: BU.chave,
