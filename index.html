@@ -18,59 +18,60 @@
   <meta property="og:title" content="Missão Indicação | Colégio CPPEM" />
   <meta property="og:description" content="Bronze, Prata e Ouro. A cada matrícula confirmada você sobe de nível. Quem você indicar ganha R$ 100 de desconto na matrícula." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0D1B3E" />
+  <meta name="theme-color" content="#0a2356" />
 
   <link rel="icon" type="image/png" href="public/logo-colegio.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* =========================================================
-       Tokens — espelham as páginas do Colégio (Contato-Colegio).
+       Tokens — espelham o site novo do Colégio (siteColegioCPPEM-Novo,
+       app/globals.css). Ritmo escuro ↔ claro: seções navy iluminadas
+       intercaladas com seções brancas. O dourado do brasão é o destaque
+       e a cor de ação.
        Trocar SÓ este bloco já leva a página para outra BU.
        ========================================================= */
     :root{
-      --gold:#C9A227; --gold-light:#E8C350; --gold-pale:#F5E4A8; --gold-dark:#A07B10;
-      --bg:#0D1B3E; --bg-alt:#081534; --surface:#122247; --surface-2:#0A1628;
-      --text:#FFFFFF; --text-soft:#CBD5E1; --text-muted:#8A9BB8;
-      --border:rgba(201,162,39,.25); --border-active:rgba(201,162,39,.6);
-      --danger:#ef7d6b; --ok:#5fd18c; --whats:#168c43;
-      --max-width:1180px;
+      --background:#ffffff; --foreground:#16264a; --muted:#56688a;
 
-      --font-display:'Cinzel'; --font-ui:'DM Sans'; --font-body:'DM Sans';
+      --blue-50:#eef5ff; --blue-100:#dcebff; --blue-200:#b7d6ff; --blue-400:#5aa2ff;
+      --blue-500:#2f7ff0; --blue-600:#1d64d6; --blue-700:#1650b0;
+      --navy:#10307a; --navy-900:#0a2356; --navy-950:#06163a;
+
+      --gold:#f2b01e; --gold-300:#ffd36b; --gold-600:#d99a0b; --gold-50:#fff6dd;
+      /* dourado escuro: o único que dá leitura como texto sobre branco */
+      --gold-700:#a06c00;
+
+      --danger:#dc2626; --danger-bg:#fef2f2; --danger-border:#f87171;
+      --max-width:1152px;
+
+      /* Anton nos títulos, Montserrat Semibold em subtítulos, botões e
+         etiquetas, Inter no texto — a mesma divisão do site. */
+      --font-title:'Anton','Montserrat',sans-serif;
+      --font-ui:'Montserrat',system-ui,sans-serif;
+      --font-body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 
       /* Cor de cada nível. O card inteiro (borda, brilho, impacto e faísca)
          é pintado a partir da sua, via --cor. */
       --bronze:#c0763a; --bronze-luz:#f0a869;
       --prata:#b8c0cc;  --prata-luz:#eef2f8;
-      --ouro:#E8C350;   --ouro-luz:#FFF0C0;
+      --ouro:#f2b01e;   --ouro-luz:#ffd36b;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;background:var(--bg)}
+    html{scroll-behavior:smooth;background:var(--navy-950)}
     body{
-      background:
-        radial-gradient(ellipse 90% 55% at 50% 0%,rgba(201,162,39,.10),transparent 70%),
-        radial-gradient(ellipse 80% 60% at 0% 80%,rgba(30,47,94,.55),transparent 70%),
-        var(--bg);
-      color:var(--text);
-      font-family:var(--font-body),system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      line-height:1.7;
+      background:var(--background);
+      color:var(--foreground);
+      font-family:var(--font-body);
+      line-height:1.65;
       overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* Grade dourada discreta — a assinatura visual das páginas do Colégio. */
-    .bg-grade{
-      position:fixed;inset:0;z-index:-1;pointer-events:none;
-      background:
-        repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(201,162,39,.035) 80px),
-        repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(201,162,39,.035) 80px);
-      -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 26%,#000 0%,transparent 85%);
-      mask-image:radial-gradient(ellipse 80% 80% at 50% 26%,#000 0%,transparent 85%);
-    }
-
-    ::selection{background:var(--gold);color:var(--bg)}
+    ::selection{background:var(--gold);color:var(--navy-950)}
     a{color:inherit;text-decoration:none}
     button,input,select{font:inherit;color:inherit}
     img{display:block;max-width:100%}
@@ -82,115 +83,159 @@
     .container{width:min(calc(100% - 2rem),var(--max-width));margin-inline:auto}
     .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 
-    .eyebrow{display:flex;align-items:center;gap:.75rem;color:var(--gold-light);font:700 .74rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}
-    .eyebrow::before{content:"";width:28px;height:1px;background:var(--gold);flex:0 0 auto}
+    /* ---------- Superfícies ---------- */
 
-    .section{position:relative;padding:clamp(3rem,7vw,5rem) 0}
-    .section-alt{background:linear-gradient(180deg,rgba(8,21,52,.85),rgba(10,22,40,.95));border-block:1px solid var(--border)}
-    .section-title{margin:1rem 0 0;font:700 clamp(1.5rem,3.6vw,2.4rem)/1.15 var(--font-display);letter-spacing:.01em;text-transform:uppercase}
-    .section-title .gold{color:var(--gold-light)}
-    .section-copy{margin:1rem 0 0;max-width:62ch;color:var(--text-soft);font-size:1rem;line-height:1.8}
+    /* navy com luz vinda de cima: base do hero, da galeria e do rodapé */
+    .surface-night{
+      position:relative;isolation:isolate;color:#fff;
+      background:
+        radial-gradient(90% 70% at 50% -10%,rgb(47 127 240 / .45),transparent 65%),
+        radial-gradient(50% 60% at 100% 100%,rgb(242 176 30 / .12),transparent 70%),
+        linear-gradient(180deg,var(--navy-900),var(--navy-950));
+    }
+    /* grade sutil que dá textura sem pesar */
+    .surface-night::before{
+      content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background-image:
+        linear-gradient(rgb(255 255 255 / .05) 1px,transparent 1px),
+        linear-gradient(90deg,rgb(255 255 255 / .05) 1px,transparent 1px);
+      background-size:56px 56px;
+      -webkit-mask-image:radial-gradient(70% 80% at 50% 30%,#000,transparent 85%);
+      mask-image:radial-gradient(70% 80% at 50% 30%,#000,transparent 85%);
+    }
+
+    /* branco com um halo azul suave, para as seções claras não ficarem chapadas */
+    .surface-day{
+      position:relative;isolation:isolate;
+      background:
+        radial-gradient(60% 50% at 15% 0%,rgb(47 127 240 / .1),transparent 70%),
+        radial-gradient(50% 45% at 90% 100%,rgb(242 176 30 / .09),transparent 70%),
+        #fff;
+    }
+    .surface-sky{background:linear-gradient(180deg,var(--blue-50),#fff 50%,var(--blue-50))}
+
+    /* orbes de luz que passeiam atrás do conteúdo */
+    .light-orbs{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .light-orbs i{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform;aspect-ratio:1}
+    .light-orbs i:nth-child(1){top:-10%;left:-8%;width:42%;background:radial-gradient(circle,rgb(90 162 255 / .55),transparent 70%);animation:orb-a 18s ease-in-out infinite}
+    .light-orbs i:nth-child(2){right:-6%;bottom:-20%;width:38%;background:radial-gradient(circle,rgb(242 176 30 / .35),transparent 70%);animation:orb-b 22s ease-in-out infinite}
+    .light-orbs i:nth-child(3){top:20%;left:45%;width:28%;background:radial-gradient(circle,rgb(47 127 240 / .45),transparent 70%);animation:orb-c 26s ease-in-out infinite}
+    @keyframes orb-a{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(35%,25%) scale(1.15)}}
+    @keyframes orb-b{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-40%,-30%) scale(.9)}}
+    @keyframes orb-c{0%,100%{transform:translate(0,0)}33%{transform:translate(-60%,30%)}66%{transform:translate(40%,-25%)}}
+
+    /* linha dourada com brilho, usada como divisor */
+    .gold-line{height:2px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold-300) 50%,var(--gold) 80%,transparent);box-shadow:0 0 14px rgb(242 176 30 / .7)}
+
+    /* ---------- Cabeçalho de seção ---------- */
+    .section{position:relative;padding:clamp(3.5rem,7vw,5rem) 0}
+    .section-head{padding-left:1rem;border-left:4px solid var(--gold)}
+    .eyebrow{color:var(--blue-600);font:700 .875rem/1.3 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}
+    .section-title{margin:.4rem 0 0;color:var(--navy);font:400 clamp(1.7rem,3.4vw,2.6rem)/1.15 var(--font-title);letter-spacing:.01em;text-transform:uppercase}
+    .section-title .gold{color:var(--gold-700)}
+    .section-copy{margin:1rem 0 0;max-width:62ch;color:var(--muted);font-size:1.0625rem;line-height:1.7}
+
+    .surface-night .eyebrow{color:var(--gold-300)}
+    .surface-night .section-title{color:#fff}
+    .surface-night .section-title .gold{color:var(--gold)}
+    .surface-night .section-copy{color:rgb(220 235 255 / .85)}
 
     /* ---------- Botões ---------- */
-    .btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.8rem 1.4rem;border:0;border-radius:.5rem;font:700 .84rem/1 var(--font-ui);letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}
-    .btn--gold{color:#16130c;background:linear-gradient(150deg,var(--gold-pale),var(--gold) 55%,var(--gold-dark));box-shadow:0 14px 40px rgba(201,162,39,.18)}
-    .btn--ghost{color:var(--text);border:1px solid var(--border-active);background:rgba(8,21,52,.6)}
-    .btn--whats{color:#fff;background:var(--whats)}
-    .btn:hover{transform:translateY(-2px)}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-    .btn:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold-pale);outline-offset:3px}
+    .btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.6rem;border:0;border-radius:999px;font:700 .95rem/1.1 var(--font-ui);text-align:center;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease,opacity .2s ease}
+    /* botão dourado com luz */
+    .btn--gold{color:var(--navy-950);background:linear-gradient(180deg,var(--gold-300),var(--gold) 55%,var(--gold-600));box-shadow:0 0 0 1px rgb(255 255 255 / .25) inset,0 8px 24px -6px rgb(242 176 30 / .65)}
+    .btn--gold:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgb(255 255 255 / .35) inset,0 12px 32px -6px rgb(242 176 30 / .85)}
+    /* secundário sobre navy */
+    .btn--ghost{color:#fff;border:1px solid rgb(255 255 255 / .35);background:rgb(255 255 255 / .1);backdrop-filter:blur(4px)}
+    .btn--ghost:hover{border-color:var(--blue-400);background:rgb(47 127 240 / .25)}
+    /* secundário sobre branco */
+    .btn--whats{color:var(--navy);border:2px solid var(--blue-100);background:#fff}
+    .btn--whats svg{color:#16a34a}
+    .btn--whats:hover{border-color:var(--blue-500);background:var(--blue-50)}
+    .btn:disabled{opacity:.7;cursor:wait;transform:none}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
     /* ---------- Header ---------- */
-    .site-header{position:sticky;z-index:50;top:0;border-bottom:1px solid var(--border);background:rgba(13,27,62,.92);backdrop-filter:blur(18px)}
-    .site-header-inner{height:70px;display:flex;align-items:center;gap:.8rem}
-    .site-header img{height:52px;width:auto;object-fit:contain}
+    .site-header{position:sticky;z-index:50;top:0;background:linear-gradient(90deg,var(--navy-950),var(--navy-900) 45%,var(--blue-700));box-shadow:0 10px 30px -12px rgb(6 22 58 / .8)}
+    .site-header-inner{display:flex;align-items:center;gap:.75rem;padding-block:.625rem}
+    .site-header img{height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 0 12px rgb(242 176 30 / .45))}
     .site-marca{display:flex;flex-direction:column;line-height:1.1}
-    .site-marca strong{font:700 .95rem/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase}
-    .site-marca span{color:var(--gold-light);font:600 .64rem/1 var(--font-ui);letter-spacing:.18em;text-transform:uppercase;margin-top:.28rem}
+    .site-marca strong{color:#fff;font:700 1.125rem/1 var(--font-ui);letter-spacing:.025em;text-transform:uppercase}
+    .site-marca strong b{color:var(--gold);font-weight:inherit}
+    .site-marca span{margin-top:.3rem;color:var(--gold-300);font:600 .66rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
     .header-cta{margin-left:auto}
-    .header-cta .btn{min-height:40px;padding:.55rem 1rem;font-size:.72rem}
+    .header-cta .btn{min-height:42px;padding:.6rem 1.25rem;font-size:.875rem;white-space:nowrap}
 
     /* =========================================================
        HERO — copy à esquerda, formulário à direita.
        O formulário fica na primeira dobra de propósito: indicar é um gesto
        de impulso, e cada rolagem entre a promessa e o campo é gente perdida.
        ========================================================= */
-    .hero{position:relative;isolation:isolate;padding:clamp(2rem,5vw,3.25rem) 0 clamp(2.5rem,5vw,3.5rem)}
+    .hero{overflow:hidden}
+    .hero-inner{padding:clamp(2rem,5vw,3.5rem) 0 clamp(2.75rem,5vw,4rem)}
     /* Header fixo: sem isto, todo link de ancora para com o titulo da
        secao escondido atras dele. */
     section[id]{scroll-margin-top:86px}
 
-    /* Brasão de fundo.
-
-       `isolation:isolate` no .hero cria um contexto de empilhamento próprio:
-       sem ele, o z-index negativo daqui manda o brasão para trás do fundo do
-       <body> e ele some.
-
-       O escudo é preenchido de azul-marinho, quase a cor do fundo — o que
-       sobra em opacidade baixa é o contorno dourado, o leão e os louros. É
-       exatamente o efeito de marca d'água que se quer aqui. */
-    .hero-brasao{
-      position:absolute;z-index:-1;pointer-events:none;
-      top:50%;left:clamp(-150px,-6vw,-30px);
-      width:clamp(360px,42vw,600px);
-      transform:translateY(-50%);
-      opacity:.14;
-      -webkit-mask-image:radial-gradient(ellipse 58% 58% at 50% 50%,#000 32%,transparent 76%);
-      mask-image:radial-gradient(ellipse 58% 58% at 50% 50%,#000 32%,transparent 76%);
-    }
-    .hero-brasao img{width:100%;height:auto;filter:saturate(1.2) brightness(1.15)}
-
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:clamp(2rem,4.5vw,3.5rem);align-items:start}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,26rem);gap:clamp(2rem,4.5vw,3.5rem);align-items:start}
     .hero-copy{align-self:center}
-    .hero h1{margin:1.1rem 0 0;font:900 clamp(1.85rem,4.4vw,3rem)/1.12 var(--font-display);letter-spacing:.005em;text-transform:uppercase}
-    .hero h1 .gold{color:var(--gold-light)}
-    .hero p.lead{margin:1.25rem 0 0;max-width:46ch;color:var(--text-soft);font-size:clamp(1rem,2.2vw,1.06rem);line-height:1.8}
-    .hero-proof{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
-    .chip{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .8rem;border:1px solid var(--border);border-radius:999px;background:rgba(201,162,39,.06);color:var(--text-soft);font:600 .72rem/1 var(--font-ui);letter-spacing:.05em;text-transform:uppercase}
-    .chip svg{color:var(--gold-light)}
-    .hero-link{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.5rem;color:var(--gold-light);font:700 .76rem var(--font-ui);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border-active);padding-bottom:.25rem}
+    .selo-topo{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border:1px solid rgb(242 176 30 / .4);border-radius:999px;background:rgb(242 176 30 / .1);color:var(--gold-300);font:700 .75rem/1.3 var(--font-ui);letter-spacing:.05em;text-transform:uppercase;box-shadow:0 0 20px rgb(242 176 30 / .25)}
+    .selo-topo::before{content:"";width:.5rem;height:.5rem;flex:0 0 auto;border-radius:50%;background:var(--gold)}
+    .hero h1{margin:1.25rem 0 0;color:#fff;font:400 clamp(2.25rem,4.6vw,3.5rem)/1.06 var(--font-title);letter-spacing:.01em}
+    .hero h1 .gold{color:var(--gold-300);background:linear-gradient(90deg,var(--gold-300),var(--gold),var(--gold-300));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p.lead{margin:1.25rem 0 0;max-width:46ch;color:rgb(220 235 255 / .9);font-size:clamp(1rem,2.2vw,1.125rem);line-height:1.7}
+    .hero-proof{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+    .chip{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .85rem;border:1px solid rgb(255 255 255 / .25);border-radius:999px;background:rgb(255 255 255 / .1);color:#fff;font:700 .75rem/1.2 var(--font-ui);backdrop-filter:blur(4px)}
+    .chip svg{color:var(--gold-300)}
+    .hero-link{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.6rem;color:var(--gold-300);font:700 .9rem/1.2 var(--font-ui);text-decoration:underline;text-decoration-color:rgb(255 211 107 / .45);text-underline-offset:5px}
+    .hero-link:hover{text-decoration-color:var(--gold-300)}
     .hero-link svg{transition:transform .2s ease}
     .hero-link:hover svg{transform:translateY(3px)}
 
     /* =========================================================
-       Formulário
+       Formulário — cartão branco com cabeçalho navy, igual ao da
+       inscrição no site.
        ========================================================= */
-    .form-card{position:relative;padding:clamp(1.4rem,3vw,1.9rem);border:1px solid var(--border-active);border-radius:1rem;background:linear-gradient(160deg,rgba(18,34,71,.97),rgba(8,21,52,.99));box-shadow:0 30px 80px rgba(0,0,0,.45)}
-    .form-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(160deg,rgba(245,228,168,.4),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-    .form-titulo{margin-bottom:1.15rem}
-    .form-titulo strong{display:block;font:700 1.15rem/1.2 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
-    .form-titulo span{display:block;margin-top:.4rem;color:var(--text-muted);font-size:.83rem;line-height:1.6}
+    .form-card{position:relative;overflow:hidden;border-radius:1.75rem;background:#fff;color:var(--foreground);box-shadow:0 30px 70px -30px rgb(0 0 0 / .7)}
+    .form-titulo{padding:1.25rem 1.5rem}
+    .form-titulo small{display:block;color:var(--gold-300);font:700 .75rem/1.3 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}
+    .form-titulo strong{display:block;margin-top:.25rem;color:#fff;font:400 1.6rem/1.15 var(--font-title);letter-spacing:.01em}
+    .form-titulo span{display:block;margin-top:.35rem;color:rgb(220 235 255 / .8);font-size:.875rem;line-height:1.5}
+    .form-conteudo{padding:1.25rem 1.5rem 1.5rem}
 
     fieldset{border:0;padding:0;margin:0;min-width:0}
-    fieldset+fieldset{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--border)}
-    legend{display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;color:var(--gold-light);font:700 .7rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
-    legend b{display:grid;width:22px;height:22px;place-items:center;border:1px solid var(--border-active);border-radius:50%;font:700 .68rem/1 var(--font-display)}
+    fieldset+fieldset{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--blue-100)}
+    /* float: sem ele o <legend> senta em cima da borda do fieldset e a linha
+       divisória atravessa o texto. */
+    legend{float:left;width:100%;display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;color:var(--blue-600);font:700 .75rem/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}
+    legend b{display:grid;width:24px;height:24px;place-items:center;border-radius:50%;color:#fff;background:linear-gradient(135deg,var(--blue-500),var(--blue-700));font:700 .72rem/1 var(--font-ui);letter-spacing:0}
+
+    legend+*{clear:both}
 
     .campo{display:grid;gap:.35rem}
-    /* O [hidden] do navegador perde para a regra de classe acima — sem esta
-       linha, esconder um campo pelo script não teria efeito nenhum. */
-    .campo+.campo{margin-top:.8rem}
-    .campo label{color:var(--text-soft);font:600 .74rem/1.3 var(--font-ui);letter-spacing:.07em;text-transform:uppercase}
-    .campo input{width:100%;min-height:46px;padding:.7rem .9rem;border:1px solid var(--border);border-radius:.5rem;background:rgba(8,21,52,.7);color:var(--text);font-size:1rem;transition:border-color .18s ease,background .18s ease}
-    .campo input::placeholder{color:#6b7c99}
-    .campo input:focus{border-color:var(--border-active);background:rgba(8,21,52,.95);outline:none}
-    .campo input.is-invalid{border-color:var(--danger)}
-    .campo .ajuda{color:var(--text-muted);font-size:.74rem;line-height:1.5}
-    .campo .erro{color:var(--danger);font-size:.77rem;line-height:1.4}
+    .campo+.campo{margin-top:.9rem}
+    .campo label{color:var(--navy);font:700 .875rem/1.3 var(--font-ui)}
+    .campo input{width:100%;min-height:46px;padding:.6rem 1rem;border:2px solid var(--blue-100);border-radius:1rem;background:rgb(238 245 255 / .6);color:var(--foreground);font-size:1rem;transition:border-color .18s ease,background .18s ease}
+    .campo input::placeholder{color:rgb(86 104 138 / .6)}
+    .campo input:hover{border-color:var(--blue-200)}
+    .campo input:focus{border-color:var(--blue-500);background:#fff;outline:none}
+    .campo input.is-invalid{border-color:var(--danger-border);background:var(--danger-bg)}
+    .campo .ajuda{color:var(--muted);font-size:.78rem;line-height:1.5}
+    .campo .erro{color:var(--danger);font-size:.78rem;font-weight:700;line-height:1.4}
     .campo .erro:empty{display:none}
 
-    .form-rodape{margin-top:1.2rem}
-    .form-rodape .btn{width:100%}
-    .form-aviso{margin-top:.8rem;color:var(--text-muted);font-size:.73rem;line-height:1.6;text-align:center}
+    .form-rodape{margin-top:1.3rem}
+    .form-rodape .btn{width:100%;font-size:1rem}
+    .form-aviso{margin-top:.8rem;color:var(--muted);font-size:.75rem;line-height:1.6;text-align:center}
 
     /* ---------- Sucesso ---------- */
-    .sucesso{display:none;padding:clamp(1rem,2vw,1.5rem) 0;text-align:center}
+    .sucesso{display:none;padding:2.5rem 1.5rem;text-align:center}
     .sucesso[data-ativo="true"]{display:block}
     .form-card[data-enviado="true"] .form-conteudo{display:none}
-    .sucesso-icone{display:grid;width:62px;height:62px;margin:0 auto;place-items:center;border:1px solid var(--border-active);border-radius:50%;color:var(--gold-light);background:rgba(201,162,39,.12)}
-    .sucesso h3{margin:1.1rem 0 0;font:700 1.3rem/1.2 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
-    .sucesso p{margin:.7rem auto 0;max-width:38ch;color:var(--text-soft);font-size:.9rem}
-    .sucesso-placar{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.1rem;padding:.5rem .9rem;border:1px solid var(--border-active);border-radius:999px;color:var(--gold-pale);font:700 .74rem/1 var(--font-ui);letter-spacing:.09em;text-transform:uppercase}
+    .sucesso-icone{display:grid;width:64px;height:64px;margin:0 auto;place-items:center;border-radius:50%;color:#059669;background:#d1fae5;box-shadow:0 0 0 8px #ecfdf5}
+    .sucesso h3{margin:1.25rem 0 0;color:var(--navy);font:400 1.6rem/1.15 var(--font-title);letter-spacing:.01em}
+    .sucesso p{margin:.6rem auto 0;max-width:38ch;color:var(--muted);font-size:.95rem}
+    .sucesso-placar{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.1rem;padding:.45rem 1rem;border-radius:999px;color:var(--navy);background:var(--gold-50);box-shadow:0 0 0 1px rgb(242 176 30 / .5);font:700 .8rem/1.2 var(--font-ui)}
     .sucesso-placar[hidden]{display:none}
     .sucesso-acoes{display:grid;gap:.7rem;margin-top:1.5rem}
 
@@ -198,21 +243,24 @@
        COMO FUNCIONA — quatro passos
        ========================================================= */
     .passos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:2.25rem;list-style:none}
-    .passo{position:relative;display:flex;flex-direction:column;gap:.9rem;padding:1.6rem 1.3rem;border:1px solid var(--border);border-radius:.8rem;background:linear-gradient(160deg,rgba(18,34,71,.9),rgba(8,21,52,.96))}
-    .passo::after{content:"";position:absolute;top:0;left:1.3rem;width:44px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
-    .passo-num{display:grid;width:42px;height:42px;place-items:center;border:1px solid var(--border-active);border-radius:50%;color:var(--gold-light);background:rgba(201,162,39,.1);font:700 1.05rem/1 var(--font-display)}
-    .passo strong{display:block;font:700 .92rem/1.25 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
-    .passo p{margin-top:.5rem;color:var(--text-muted);font-size:.85rem;line-height:1.65}
+    .passo{display:flex;flex-direction:column;gap:1rem;padding:1.5rem 1.35rem;border-radius:1.75rem;background:#fff;box-shadow:0 0 0 1px var(--blue-100),0 18px 44px -28px rgb(16 48 122 / .55)}
+    .passo-num{display:grid;width:52px;height:52px;place-items:center;border-radius:1rem;color:#fff;background:linear-gradient(135deg,var(--blue-400),var(--blue-700));box-shadow:0 10px 22px -10px rgb(47 127 240 / .9);font:400 1.5rem/1 var(--font-title)}
+    .passo strong{display:block;color:var(--navy);font:700 1.05rem/1.25 var(--font-ui)}
+    .passo p{margin-top:.4rem;color:var(--muted);font-size:.9rem;line-height:1.6}
 
     /* =========================================================
        NÍVEIS — entram caindo e batendo no chão
        ========================================================= */
-    .niveis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.5rem;perspective:1200px}
+    .niveis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem;perspective:1200px}
 
     .nivel{
       position:relative;display:flex;flex-direction:column;overflow:hidden;
-      padding:1.6rem 1.4rem;border:1px solid var(--border);border-radius:.85rem;
-      background:linear-gradient(160deg,rgba(18,34,71,.95),rgba(8,21,52,.98));
+      padding:1.75rem 1.5rem;border:1px solid rgb(255 255 255 / .1);border-radius:1.5rem;
+      color:#fff;
+      background:
+        radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--cor) 26%,transparent),transparent 62%),
+        linear-gradient(180deg,var(--navy),var(--navy-950));
+      box-shadow:0 20px 40px -22px rgb(6 22 58 / .7);
       transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
       opacity:0;
     }
@@ -228,10 +276,10 @@
     /* Pousado: o estado final, já sem animação no card. É o que devolve o
        :hover — uma animação com fill-mode "forwards" congela o transform e
        deixaria o hover sem efeito pelo resto da página. */
-    .nivel[data-pousado="true"]{opacity:1;border-color:var(--border-active)}
+    .nivel[data-pousado="true"]{opacity:1;border-color:color-mix(in srgb,var(--cor) 55%,transparent)}
     .nivel[data-pousado="true"]::before{animation:nivel-impacto .55s ease-out forwards}
     .nivel[data-pousado="true"]::after{animation:nivel-faisca .9s ease-out .06s forwards}
-    .nivel[data-pousado="true"]:hover{transform:translateY(-4px);border-color:var(--cor);box-shadow:0 16px 44px -18px var(--cor)}
+    .nivel[data-pousado="true"]:hover{transform:translateY(-8px);border-color:var(--cor);box-shadow:0 30px 60px -20px color-mix(in srgb,var(--cor) 75%,transparent)}
 
     @keyframes nivel-cair{
       0%   {opacity:0;transform:translate3d(0,-160px,0) rotateX(24deg) scale(.97)}
@@ -252,40 +300,41 @@
     }
 
     .nivel-topo{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
-    .nivel-nome{color:var(--cor-luz);font:700 1.3rem/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 0 18px color-mix(in srgb,var(--cor) 55%,transparent)}
-    .nivel-meta{padding:.3rem .55rem;border:1px solid var(--border);border-radius:999px;color:var(--text-muted);font:700 .6rem/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-    .nivel ul{margin:1.15rem 0 0;display:grid;gap:.7rem;list-style:none}
-    .nivel li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:.6rem;align-items:start;color:var(--text-soft);font-size:.88rem;line-height:1.55}
+    .nivel-nome{color:var(--cor-luz);font:400 2rem/1 var(--font-title);letter-spacing:.02em;text-transform:uppercase;text-shadow:0 0 18px color-mix(in srgb,var(--cor) 55%,transparent)}
+    .nivel-meta{padding:.4rem .7rem;border:1px solid rgb(255 255 255 / .2);border-radius:999px;background:rgb(255 255 255 / .08);color:rgb(220 235 255 / .9);font:700 .68rem/1 var(--font-ui);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+    .nivel ul{margin:1.25rem 0 0;display:grid;gap:.7rem;list-style:none}
+    .nivel li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:.6rem;align-items:start;color:rgb(220 235 255 / .9);font-size:.95rem;line-height:1.55}
     .nivel li svg{margin-top:.3rem;color:var(--cor-luz)}
-    .nivel li strong{color:var(--text);font-weight:700}
+    .nivel li strong{color:#fff;font-weight:700}
 
     /* =========================================================
-       Selo do indicado — o anel carrega enquanto o valor sobe
+       Selo do indicado — o anel carrega enquanto o valor sobe.
+       Faixa dourada, como a chamada de convênio do site.
        ========================================================= */
-    .indicado-faixa{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(1.5rem,4vw,2.5rem);margin-top:1.5rem;padding:clamp(1.3rem,3vw,1.8rem);border:1px solid var(--border-active);border-radius:.85rem;background:linear-gradient(120deg,rgba(201,162,39,.16),rgba(8,21,52,.96))}
-    .indicado-faixa small{color:var(--gold-light);font:700 .66rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
-    .indicado-faixa strong{display:block;margin-top:.5rem;font:700 clamp(1.05rem,2.4vw,1.35rem)/1.25 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
-    .indicado-faixa p{margin-top:.5rem;max-width:56ch;color:var(--text-soft);font-size:.88rem}
+    .indicado-faixa{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(1.5rem,4vw,2.5rem);margin-top:1.5rem;padding:clamp(1.5rem,3vw,2.25rem);border-radius:1.75rem;color:var(--navy-950);background:linear-gradient(135deg,var(--gold-300),var(--gold) 55%,var(--gold-600));box-shadow:0 24px 50px -28px rgb(217 154 11 / .9)}
+    .indicado-faixa small{color:rgb(6 22 58 / .72);font:700 .8rem/1.3 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}
+    .indicado-faixa strong{display:block;margin-top:.35rem;font:400 clamp(1.5rem,3vw,2.1rem)/1.15 var(--font-title);letter-spacing:.01em}
+    .indicado-faixa p{margin-top:.6rem;max-width:56ch;color:rgb(6 22 58 / .88);font-size:1rem}
 
     .selo{
-      position:relative;display:grid;place-items:center;flex:0 0 auto;
-      width:142px;height:142px;border-radius:50%;
+      position:relative;display:grid;place-items:center;align-content:center;flex:0 0 auto;
+      width:150px;height:150px;border-radius:50%;
       /* --p vai de 0 a 100 e é escrito pelo script a cada quadro */
-      background:conic-gradient(var(--gold-pale) calc(var(--p,0) * 1%),rgba(201,162,39,.18) 0);
-      filter:drop-shadow(0 0 18px rgba(201,162,39,.28));
+      background:conic-gradient(var(--navy-950) calc(var(--p,0) * 1%),rgb(6 22 58 / .18) 0);
+      filter:drop-shadow(0 14px 22px rgb(6 22 58 / .3));
     }
-    .selo::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#0b1a3a}
+    .selo::before{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff}
     .selo-num,.selo-off{position:relative;z-index:1}
     /* nowrap + line-height 1: sem isso o "R$ 100" quebra entre o cifrão e o número */
-    .selo-num{display:block;color:var(--gold-pale);font:700 1.65rem/1 var(--font-display);white-space:nowrap;letter-spacing:0}
-    .selo-off{display:block;margin-top:.35rem;color:var(--text-muted);font:700 .55rem/1.2 var(--font-ui);letter-spacing:.16em;text-align:center}
+    .selo-num{display:block;color:var(--navy);font:400 2rem/1 var(--font-title);white-space:nowrap;letter-spacing:.01em}
+    .selo-off{display:block;margin-top:.4rem;color:var(--muted);font:700 .58rem/1.2 var(--font-ui);letter-spacing:.12em;text-align:center;text-transform:uppercase}
 
     /* ---------- A partir da 3ª ---------- */
-    .semlimite{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(1.2rem,3vw,2rem);margin-top:2rem;padding:clamp(1.4rem,3vw,2rem);border:1px solid var(--border-active);border-radius:.85rem;background:linear-gradient(120deg,rgba(8,21,52,.96),rgba(201,162,39,.12))}
-    .semlimite-icone{display:grid;width:64px;height:64px;place-items:center;border:1px solid var(--border-active);border-radius:50%;color:var(--gold-light);background:rgba(201,162,39,.1)}
-    .semlimite strong{display:block;font:700 clamp(1.05rem,2.4vw,1.35rem)/1.25 var(--font-display);letter-spacing:.03em;text-transform:uppercase}
-    .semlimite p{margin-top:.5rem;color:var(--text-soft);font-size:.92rem;line-height:1.75}
-    .semlimite p b{color:var(--gold-pale)}
+    .semlimite{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(1.2rem,3vw,1.75rem);margin-top:1.25rem;padding:clamp(1.4rem,3vw,2rem);border-radius:1.75rem;background:#fff;box-shadow:0 0 0 1px var(--blue-100),0 18px 44px -28px rgb(16 48 122 / .55)}
+    .semlimite-icone{display:grid;width:60px;height:60px;place-items:center;border-radius:1.1rem;color:#fff;background:linear-gradient(135deg,var(--blue-400),var(--blue-700));box-shadow:0 10px 22px -10px rgb(47 127 240 / .9)}
+    .semlimite strong{display:block;color:var(--navy);font:400 clamp(1.35rem,2.6vw,1.75rem)/1.15 var(--font-title);letter-spacing:.01em}
+    .semlimite p{margin-top:.5rem;color:var(--muted);font-size:1rem;line-height:1.7}
+    .semlimite p b{color:var(--navy)}
 
     /* =========================================================
        CARROSSEL INFINITO
@@ -303,11 +352,11 @@
        lista lida duas vezes.
        ========================================================= */
     .carrossel{
-      --gap:.8rem;
+      --gap:1rem;
       position:relative;overflow:hidden;margin-top:2.25rem;
       /* as pontas somem em vez de serem cortadas na faca */
-      -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-      mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
     }
     .carrossel-fita{display:flex;gap:var(--gap);width:max-content;animation:rolar var(--duracao,48s) linear infinite}
     .carrossel:hover .carrossel-fita,.carrossel:focus-within .carrossel-fita{animation-play-state:paused}
@@ -320,15 +369,16 @@
 
     .carrossel figure{
       position:relative;flex:0 0 auto;margin:0;overflow:hidden;
-      width:clamp(190px,20vw,250px);
-      border:1px solid var(--border);border-radius:.7rem;background:var(--surface-2);
+      width:clamp(230px,26vw,336px);
+      border-radius:1.5rem;background:var(--navy-900);
+      box-shadow:0 0 0 1px rgb(255 255 255 / .14) inset;
     }
-    .carrossel img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+    .carrossel img{width:100%;height:100%;aspect-ratio:3/2;object-fit:cover;display:block}
 
     .carrossel figcaption{
-      position:absolute;right:0;bottom:0;left:0;padding:1.6rem .8rem .65rem;
-      background:linear-gradient(180deg,transparent,rgba(6,13,31,.92));
-      color:var(--gold-pale);font:700 .66rem/1.2 var(--font-ui);letter-spacing:.12em;text-transform:uppercase;
+      position:absolute;right:0;bottom:0;left:0;padding:2rem 1rem .8rem;
+      background:linear-gradient(180deg,transparent,rgb(6 22 58 / .9));
+      color:#fff;font:700 .8rem/1.2 var(--font-ui);letter-spacing:.06em;text-transform:uppercase;
     }
 
     /* Quem pediu menos movimento rola a fita com o dedo ou o trackpad, e a
@@ -339,23 +389,24 @@
       .carrossel-grupo[aria-hidden="true"]{display:none}
     }
 
-    .galeria-rodape{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.5rem;padding-top:1.35rem;border-top:1px solid var(--border)}
-    .galeria-rodape p{flex:1 1 320px;margin:0;color:var(--text-muted);font-size:.86rem;line-height:1.65}
-    .galeria-rodape p b{color:var(--gold-pale);font-weight:700}
+    .galeria-rodape{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid rgb(255 255 255 / .12)}
+    .galeria-rodape p{flex:1 1 320px;margin:0;color:rgb(220 235 255 / .82);font-size:.95rem;line-height:1.65}
+    .galeria-rodape p b{color:var(--gold-300);font-weight:700}
 
     /* ---------- Regras ---------- */
     .regras{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem;margin-top:2rem}
-    .regra{display:grid;grid-template-columns:20px minmax(0,1fr);gap:.85rem;padding:1.2rem;border:1px solid var(--border);border-radius:.6rem;background:rgba(8,21,52,.55)}
-    .regra>svg{margin-top:.3rem;color:var(--gold-light)}
-    .regra strong{display:block;font:700 .84rem/1.3 var(--font-display);letter-spacing:.04em;text-transform:uppercase}
-    .regra p{margin-top:.4rem;color:var(--text-muted);font-size:.84rem;line-height:1.65}
+    .regra{display:grid;grid-template-columns:44px minmax(0,1fr);gap:.9rem;padding:1.1rem;border-radius:1rem;background:rgb(238 245 255 / .7);box-shadow:0 0 0 1px var(--blue-100)}
+    .regra>svg{box-sizing:border-box;width:44px;height:44px;padding:11px;border-radius:.75rem;color:var(--blue-600);background:#fff;box-shadow:0 0 0 1px var(--blue-100)}
+    .regra strong{display:block;color:var(--navy);font:700 1rem/1.3 var(--font-ui)}
+    .regra p{margin-top:.3rem;color:var(--muted);font-size:.9rem;line-height:1.6}
 
     /* ---------- Footer ---------- */
-    .site-footer{padding:2.5rem 0;border-top:1px solid var(--border);background:rgba(6,13,31,.85)}
-    .site-footer-inner{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
-    .site-footer img{height:44px;width:auto;opacity:.85}
-    .site-footer p{color:var(--text-muted);font-size:.78rem;line-height:1.7}
-    .site-footer a{color:var(--gold-light)}
+    .site-footer{overflow:hidden}
+    .site-footer-inner{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem;padding-block:2.5rem}
+    .site-footer img{height:72px;width:auto;filter:drop-shadow(0 12px 24px rgb(0 0 0 / .45))}
+    .site-footer p{flex:1 1 240px;color:rgb(220 235 255 / .75);font-size:.875rem;line-height:1.7}
+    .site-footer a{color:var(--gold-300);font-weight:700;text-underline-offset:4px}
+    .site-footer a:hover{text-decoration:underline}
 
     /* ---------- Responsivo ---------- */
     @media (max-width:1080px){
@@ -363,21 +414,20 @@
     }
     @media (max-width:980px){
       .hero-grid{grid-template-columns:minmax(0,1fr)}
+      .form-card{width:100%;max-width:34rem;margin-inline:auto}
       .niveis{grid-template-columns:minmax(0,1fr)}
       .indicado-faixa{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
       .indicado-faixa p{margin-inline:auto}
       .selo{order:-1}
       .semlimite{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
-
-      /* No empilhado o brasão fica embaixo do formulário, onde só atrapalharia:
-         sobe para a altura do título e clareia mais ainda. */
-      .hero-brasao{top:clamp(160px,28vw,250px);left:50%;width:min(100vw,480px);transform:translate(-50%,-50%);opacity:.1}
     }
     @media (max-width:620px){
       .passos{grid-template-columns:minmax(0,1fr)}
-      .header-cta .btn{padding:.5rem .75rem;font-size:.66rem}
-      .site-marca strong{font-size:.82rem}
-      .nivel-topo{flex-direction:column;align-items:flex-start;gap:.5rem}
+      .header-cta .btn{padding:.55rem .9rem;font-size:.8rem}
+      .site-header img{height:44px}
+      .site-marca strong{font-size:.95rem}
+      .site-marca span{font-size:.58rem;letter-spacing:.12em}
+      .galeria-rodape .btn{flex:1 1 100%}
     }
 
     /* Quem pediu menos movimento vê tudo parado e no lugar — nada de cair,
@@ -385,13 +435,13 @@
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       *,*::before,*::after{animation:none!important;transition:none!important}
-      .nivel{opacity:1;border-color:var(--border-active)}
+      .nivel{opacity:1;border-color:color-mix(in srgb,var(--cor) 55%,transparent)}
     }
   </style>
 
   <!-- Sem JavaScript não há quem dispare a queda: os cards apareceriam
        invisíveis. Aqui eles nascem prontos, no lugar. -->
-  <noscript><style>.nivel{opacity:1;border-color:var(--border-active)}</style></noscript>
+  <noscript><style>.nivel{opacity:1;border-color:color-mix(in srgb,var(--cor) 55%,transparent)}</style></noscript>
 </head>
 
 <body>
@@ -399,35 +449,33 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://sgtm.cppem.com.br/metrics/ns.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <div class="bg-grade" aria-hidden="true"></div>
-
   <header class="site-header">
     <div class="container site-header-inner">
       <img src="public/logo-colegio.png" alt="Colégio CPPEM" width="52" height="52" />
       <span class="site-marca">
-        <strong>Colégio CPPEM</strong>
+        <strong>Colégio <b>CPPEM</b></strong>
         <span>Missão Indicação</span>
       </span>
       <div class="header-cta">
         <a class="btn btn--gold" href="#indicar">Indicar agora</a>
       </div>
     </div>
+    <div class="gold-line" aria-hidden="true"></div>
   </header>
 
   <main>
 
     <!-- ============ HERO + FORMULÁRIO ============ -->
-    <section class="hero" id="indicar">
+    <section class="hero surface-night" id="indicar">
 
-      <!-- Brasão só de enfeite: não entra na leitura nem recebe clique. -->
-      <div class="hero-brasao" aria-hidden="true">
-        <img src="public/logo-colegio.png" alt="" width="600" height="600" />
-      </div>
+      <!-- Orbes só de enfeite: não entram na leitura nem recebem clique. -->
+      <div class="light-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
 
+      <div class="hero-inner">
       <div class="container hero-grid">
 
         <div class="hero-copy">
-          <p class="eyebrow">Programa de indicação · Colégio CPPEM</p>
+          <p class="selo-topo">Programa de indicação · Colégio CPPEM</p>
           <h1>Seu filho já está aqui.<br /><span class="gold">Traga os amigos dele.</span></h1>
           <p class="lead">
             Você viu a mudança em casa. Na postura, na rotina, no jeito de
@@ -459,11 +507,14 @@
 
         <div class="form-card" id="cartao-form">
 
+          <div class="form-titulo surface-night">
+            <small>Missão Indicação</small>
+            <strong>Faça sua indicação</strong>
+            <span>Leva menos de um minuto. Quer indicar mais de uma família? Dá para repetir sem redigitar seus dados.</span>
+          </div>
+          <div class="gold-line" aria-hidden="true"></div>
+
           <div class="form-conteudo">
-            <div class="form-titulo">
-              <strong>Faça sua indicação</strong>
-              <span>Leva menos de um minuto. Quer indicar mais de uma família? Dá para repetir sem redigitar seus dados.</span>
-            </div>
 
             <form id="form-indicacao" novalidate>
 
@@ -532,13 +583,18 @@
 
         </div>
       </div>
+      </div>
+
+      <div class="gold-line" aria-hidden="true"></div>
     </section>
 
     <!-- ============ COMO FUNCIONA ============ -->
-    <section class="section section-alt" id="como-funciona">
+    <section class="section surface-day" id="como-funciona">
       <div class="container">
-        <p class="eyebrow">Como participar</p>
-        <h2 class="section-title">Quatro passos, <span class="gold">do envio ao benefício</span></h2>
+        <div class="section-head">
+          <p class="eyebrow">Como participar</p>
+          <h2 class="section-title">Quatro passos, <span class="gold">do envio ao benefício</span></h2>
+        </div>
 
         <ol class="passos">
           <li class="passo">
@@ -574,10 +630,12 @@
     </section>
 
     <!-- ============ NÍVEIS ============ -->
-    <section class="section" id="niveis">
+    <section class="section surface-sky" id="niveis">
       <div class="container">
-        <p class="eyebrow">Missão Indicação</p>
-        <h2 class="section-title">O que <span class="gold">você ganha</span> em cada nível</h2>
+        <div class="section-head">
+          <p class="eyebrow">Missão Indicação</p>
+          <h2 class="section-title">O que <span class="gold">você ganha</span> em cada nível</h2>
+        </div>
         <p class="section-copy">
           Só entra no placar quem matricula de verdade. A secretaria confere o
           seu nível na hora em que a matrícula é confirmada.
@@ -646,10 +704,12 @@
     </section>
 
     <!-- ============ O QUE VOCÊ ESTÁ INDICANDO ============ -->
-    <section class="section section-alt" id="a-escola">
+    <section class="section surface-night" id="a-escola">
       <div class="container">
-        <p class="eyebrow">O que você está indicando</p>
-        <h2 class="section-title">Colégio cristão com <span class="gold">disciplina militarizada</span></h2>
+        <div class="section-head">
+          <p class="eyebrow">O que você está indicando</p>
+          <h2 class="section-title">Colégio cristão com <span class="gold">disciplina militarizada</span></h2>
+        </div>
         <p class="section-copy">
           Oração antes da aula, continência no pátio, fardamento impecável. Do
           1º ano do Fundamental ao 3º do Médio, no centro de Caruaru. É isto que
@@ -704,10 +764,12 @@
     </section>
 
     <!-- ============ REGRAS ============ -->
-    <section class="section">
+    <section class="section surface-day">
       <div class="container">
-        <p class="eyebrow">Regras</p>
-        <h2 class="section-title">O que você precisa <span class="gold">saber antes</span></h2>
+        <div class="section-head">
+          <p class="eyebrow">Regras</p>
+          <h2 class="section-title">O que você precisa <span class="gold">saber antes</span></h2>
+        </div>
 
         <div class="regras">
           <div class="regra">
@@ -739,9 +801,10 @@
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer surface-night">
+    <div class="gold-line" aria-hidden="true"></div>
     <div class="container site-footer-inner">
-      <img src="public/logo-colegio.png" alt="Colégio CPPEM" width="44" height="44" />
+      <img src="public/logo-colegio.png" alt="Colégio CPPEM" width="72" height="72" />
       <p>
         Missão Indicação, o programa de indicação do Colégio CPPEM.<br />
         Dúvidas? <a id="rodape-whats" href="#" target="_blank" rel="noopener">Fale com a secretaria no WhatsApp</a>.

@@ -4,8 +4,9 @@ Página do programa de indicação do Colégio. Uma pessoa indica outra, e as du
 aparecem na **mesma linha** da aba `INDICAÇÕES` da planilha de leads, com
 `COLEGIO` na coluna BU.
 
-Irmã da `indicaçõesCPPEM`: mesma estrutura, mesmo HTML, mesmo CSS. O que muda é
-o bloco `BU` no `script.js`, os tokens de cor e o texto dos benefícios.
+Irmã da `indicaçõesCPPEM`: mesma estrutura, mesmas classes e mesmo `script.js`.
+O que muda é o bloco `BU` no `script.js`, o texto dos benefícios e o visual,
+que aqui segue o site novo do Colégio (seção 4).
 
 ```
 index.html     a página inteira (HTML + CSS)
@@ -97,28 +98,37 @@ inicial, para quem tem animação desligada no sistema.
 
 ## 4. Identidade visual
 
-Bloco `:root` no topo do `<style>` — é o único lugar onde as cores são
-definidas.
+Segue o **site novo do Colégio** (`siteColegioCPPEM-Novo`, rebranding 2026). Os
+tokens do bloco `:root` no topo do `<style>` são os mesmos do
+`app/globals.css` de lá — é o único lugar onde as cores são definidas.
 
 | | Colégio | CPPEM |
 |---|---|---|
-| fundo | `#0D1B3E` (navy) | `#0a0a0b` (preto) |
-| destaque | `#C9A227` | `#af9256` |
-| display | Cinzel | Oxanium |
-| texto | DM Sans | Inter |
+| fundo | navy iluminado (`#0a2356` → `#06163a`) alternado com branco | `#0a0a0b` (preto) |
+| destaque | `#f2b01e` (dourado do brasão) | `#af9256` |
+| títulos | Anton | Oxanium |
+| subtítulos, botões e etiquetas | Montserrat | — |
+| texto | Inter | Inter |
 
-Duas coisas fora dos tokens:
+O que veio do site, com o mesmo nome de classe de lá:
 
-- **A grade dourada** (`.bg-grade`) é a assinatura das páginas do Colégio,
-  herdada do `Contato-Colegio`. Não existe na página do CPPEM.
-- **O brasão de fundo** do hero usa o próprio logo do Colégio. O escudo é
-  preenchido de azul-marinho, quase a cor do fundo, então em opacidade baixa
-  sobra só o contorno dourado, o leão e os louros — que é exatamente o efeito
-  de marca d'água desejado. A página do CPPEM usa o emblema do leão isolado.
+- **`.surface-night`**: navy com luz vinda de cima e grade sutil. Hero,
+  cabeçalho do formulário, galeria e rodapé. O hero leva também os orbes de
+  luz (`.light-orbs`).
+- **`.surface-day`**: branco com halo azul, nas seções claras. O ritmo da
+  página é escuro ↔ claro, como no site.
+- **`.gold-line`**: a linha dourada com brilho que fecha o header e o hero.
+- **Botões em pílula**, o dourado com gradiente e luz (`.btn--gold`).
+- **Formulário**: cartão branco com cabeçalho navy, igual ao da inscrição em
+  `/matriculas`.
+- **Faixa dourada** do "para quem você indicar": mesma linguagem da chamada de
+  convênio da página de Parceiros.
 
-Um detalhe que custou um teste: **`ª` em Cinzel maiúsculo** vira um "A"
-sobrescrito estranho. Por isso o título da seção é "A partir da terceira, não
-para" em vez de "da 3ª". Nos chips, que são DM Sans, o `3ª` sai certo e ficou.
+Dourado como **texto sobre branco** é sempre `--gold-700`; o `--gold` puro não
+dá leitura em fundo claro.
+
+Os cards de nível continuam escuros mesmo na seção clara: a faísca usa
+`mix-blend-mode:screen`, que some sobre branco.
 
 ---
 
